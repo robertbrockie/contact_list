@@ -1,4 +1,3 @@
-<?php include('view/header.php'); ?>
 <form action="index.php?action=add" method="post" accept-charset="utf-8" class="well form-inline">
 	<input type="text" name="last_name" class="input-small" placeholder="Last Name" value="<?= $data['last_name'] ?>">
 	<input type="text" name="first_name" class="input-small" placeholder="First Name" value="<?= $data['first_name'] ?>">
@@ -15,4 +14,3 @@
 
     <?php if(isset($errors)) { include('view/errors.php'); } ?>
 </form>
-<?php include('view/footer.php');

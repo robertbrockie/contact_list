@@ -30,22 +30,31 @@ class ContactModel
     public function AddContact($data)
     {
         //insert the contact
-        $query = sprintf("INSERT INTO contact (first_name, last_name) VALUES ('%s', '%s')",
+        $query = sprintf("INSERT INTO contact (first_name, last_name, type, number) VALUES ('%s', '%s', '%s', '%s')",
             mysql_real_escape_string($data['first_name']),
-            mysql_real_escape_string($data['last_name']));
-        
-        $contact_id = $this->db->insert($query);
-
-        //insert the contact's number
-        $query = sprintf("INSERT INTO number (contact_id, type, number) VALUES (%d, '%s', '%s')",
-            $contact_id,
+            mysql_real_escape_string($data['last_name']),
             mysql_real_escape_string($data['type']),
             mysql_real_escape_string($data['number']));
 
-        $number_id = $this->db->insert($query);
+        $contact_id = $this->db->insert($query);
 
-        return ($contact_id > 0 && $number_id);
+        return ($contact_id > 0);
 
+    }
+
+    /**
+    *   GetContacts
+    *
+    *   Get a list of contacts from the database.
+    **/
+    public function GetContacts()
+    {
+        $query = sprintf("SELECT * FROM contact");
+
+        $result = $this->db->query($query);
+
+        //get the contacts, then get their numbers
+        //var_dump($result);
     }
       
     public function DeleteContact($id)

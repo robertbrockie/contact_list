@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 30, 2012 at 11:49 PM
+-- Generation Time: Jul 01, 2012 at 12:43 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-1ubuntu9.10
 
@@ -29,29 +29,14 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(256) NOT NULL,
   `last_name` varchar(256) NOT NULL,
+  `number` varchar(128) NOT NULL,
+  `type` enum('MOBILE','HOME','OFFICE','OTHER') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `contact`
 --
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `number`
---
-
-CREATE TABLE IF NOT EXISTS `number` (
-  `id` int(8) NOT NULL AUTO_INCREMENT,
-  `contact_id` int(8) NOT NULL,
-  `type` enum('MOBILE','HOME','OFFICE','OTHER') NOT NULL,
-  `number` varchar(128) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `number`
---
-
+INSERT INTO `contact` (`id`, `first_name`, `last_name`, `number`, `type`) VALUES
+(1, 'Kim', 'Phillips', '514-891-2325', 'MOBILE');
