@@ -8,17 +8,19 @@
 			<th>Type</th>
 			<th>Number</th>
 			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<?php foreach ($contacts as $contact) : ?>
-		<tr>
+		<tr id="row_<?= $contact->id ?>">
 			<td><?= $contact->last_name ?></td>
 			<td><?= $contact->first_name ?></td>
 			<td><?= $contact->type ?></td>
 			<td><?= $contact->number ?></td>
-			<td>[x]</td>
+			<td><a href="/index.php?action=edit&id=<?= $contact->id ?>">[edit]</a></td>
+			<td><a href="/index.php?action=delete&id=<?= $contact->id ?>" onclick="DeleteContact(<?= $contact->id ?>); return false;">[remove]</a></td>
 		</tr>
 		<?php endforeach ?>
 	</tbody>

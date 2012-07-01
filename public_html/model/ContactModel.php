@@ -50,16 +50,26 @@ class ContactModel
     public function GetContacts()
     {
         $query = sprintf("SELECT * FROM contact");
-
         $result = $this->db->query($query);
 
-        //get the contacts, then get their numbers
-        //var_dump($result);
+        //get the contacts we want
+        $contacts = array();
+        while ($row = mysql_fetch_assoc($result))
+        {
+            array_push($contacts, new Contact(
+                    $row['id'], $row['first_name'], $row['last_name'],
+                    $row['number'], $row['type']));
+        }
+
+        return $contacts;
     }
       
     public function DeleteContact($id)
     {  
-        return 0;
+        $query = sprintf("DELETE FROM contact WHERE id='%s'", $id);
+        $result = $this->db->query($query);
+
+        return $result;
     }
 
     public function UpdateContact($data)
