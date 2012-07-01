@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
 
 CREATE TABLE IF NOT EXISTS `number` (
   `id` int(8) NOT NULL,
-  `person_id` int(8) NOT NULL,
+  `contact_id` int(8) NOT NULL,
   `type` enum('MOBILE','HOME','OFFICE','OTHER') NOT NULL,
   `number` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
