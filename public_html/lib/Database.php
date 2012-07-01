@@ -6,7 +6,7 @@ class Database
   public $hostname = "localhost";
   public $username = "root";
   public $password = "foobar";
-  public $database = "contact";
+  public $database = "contact_list";
   public $result;
   public $connection_id;
 
@@ -39,6 +39,16 @@ class Database
   {
     $this->result=mysql_query($query, $this->connection_id) or $this->query_error();
     return $this->result;
+  }
+
+  public function insert($query)
+  {
+    return $this->query($query) ? mysql_insert_id() : 0;
+  }
+
+  function query_error()
+  {
+    die("<b>QUERY ERROR:</b> ".mysql_error());
   }
 
 }
