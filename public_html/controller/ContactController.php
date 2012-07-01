@@ -34,9 +34,6 @@ class ContactController
 
       case "delete":
       {
-        //TODO:remove debugging
-        error_log("delete: ".$vals['id']);
-
         $this->delete($vals['id']);
         break;
       }
@@ -44,6 +41,12 @@ class ContactController
       case "edit":
       {
         $this->edit($_GET['id']);
+        break;
+      }
+
+      case "list":
+      {
+        $this->listing();
         break;
       }
     }
@@ -83,25 +86,36 @@ class ContactController
     if(empty($vals['number']))
       $errors['number'] = "Number is required.";
 
-    //if validation passed add the contact, otherwise send back
-    //the errors and data to fill out the form.
-    if(count($errors) == 0)
-    {
-      //add the contact
-      $this->contact_model->AddContact($vals);
-      header('Location: index.php');
-    }
-
-    //ajax calls will be done via post
+    // All AJAX calls are done via a POST request. This is because
+    // I want the application to function if Javascript isn't enabled.
     if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
+      //If we are error free, add the new contact and clear the vals
+      //because we don't need to populate the form anymore.
+      if(count($errors) == 0)
+      {
+        $this->contact_model->AddContact($vals);
+        unset($vals);
+      }
+      
       include('view/add_contact.php');
     }
     else
     {
-      //update the contacts for display
-      $contacts = $this->contact_model->GetContacts();
-      include("view/template.php");
+      //If we are error free, add the new contact and redirect to the 
+      //index page to update the contact list.
+      if(count($errors) == 0)
+      {
+        //add the contact
+        $this->contact_model->AddContact($vals);
+        header('Location: index.php');
+      }
+      else
+      {
+        //display the errors
+        $contacts = $this->contact_model->GetContacts();
+        include("view/template.php");
+      }
     }
   }
 
@@ -133,6 +147,29 @@ class ContactController
   public function edit($id)
   {
     //do something
+  }
+
+  /**
+  * list
+  *
+  * List all contacts in the database.
+  **/
+  public function listing()
+  {
+    //get the latest contacts
+    $contacts = $this->contact_model->GetContacts();
+
+    //ajax calls will be done via post
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      include('view/list_contacts.php');
+    }
+    else
+    {
+      include('view/header.php');
+      include('view/list_contacts.php');
+      include('view/footer.php');
+    }
   }
 
 
