@@ -10,7 +10,7 @@ class ContactController
   public function __construct()  
   {
     $this->contact_model = new ContactModel();
-  }   
+  }
 
   public function invoke()  
   {
