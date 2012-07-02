@@ -43,6 +43,23 @@ class ContactModel
     }
 
     /**
+    *   GetContact
+    *
+    *   Get a contact by id
+    **/
+    public function GetContact($id)
+    {
+        $query = sprintf("SELECT * FROM contact WHERE id='%d'", $id);
+        $result = $this->db->query($query);
+
+        //get the contact we want
+        $row = mysql_fetch_assoc($result);
+        $contact = new Contact($row['id'], $row['first_name'], $row['last_name'], $row['number'], $row['type']);
+        
+        return $contact;
+    }
+
+    /**
     *   GetContacts
     *
     *   Get a list of contacts from the database.
@@ -63,7 +80,12 @@ class ContactModel
 
         return $contacts;
     }
-      
+
+    /**
+    *   DeleteContact
+    *
+    *   Remove a contact from the database by their id.
+    **/
     public function DeleteContact($id)
     {  
         $query = sprintf("DELETE FROM contact WHERE id='%s'", $id);
@@ -72,8 +94,23 @@ class ContactModel
         return $result;
     }
 
+    /**
+    *   UpdateContact
+    *
+    *   Update the information for a specific contact.
+    **/
     public function UpdateContact($data)
     {
-        return 0;
+        //insert the contact
+        $query = sprintf("UPDATE contact SET first_name='%s', last_name='%s', type='%s', number='%s' WHERE id='%s'",
+            mysql_real_escape_string($data['first_name']),
+            mysql_real_escape_string($data['last_name']),
+            mysql_real_escape_string($data['type']),
+            mysql_real_escape_string($data['number']),
+            mysql_real_escape_string($data['id']));
+
+        $result = $this->db->query($query);
+
+        return $result;
     }
 }

@@ -16,6 +16,8 @@ class ContactController
   {
     //invoke will take care of figuring out 
     $vals = array_merge($_POST, $_GET);
+    
+    //what are we doing?
     $action = isset($vals['action']) ? $vals['action'] : "index";
 
     switch ($action)
@@ -40,13 +42,19 @@ class ContactController
 
       case "edit":
       {
-        $this->edit($_GET['id']);
+        $this->edit($vals['id']);
         break;
       }
 
       case "list":
       {
         $this->listing();
+        break;
+      }
+
+      case "update":
+      {
+        $this->update();
         break;
       }
     }
@@ -142,10 +150,25 @@ class ContactController
   /**
   * edit($id)
   *
-  * Edit the fields of a specific contact.
+  * Display the 
   **/
   public function edit($id)
   {
+    $contact = $this->contact_model->GetContact($id);
+
+    //ajax calls will be done via post
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      //TODO: this functionality isn't needed right now 
+    }
+    else
+    {
+      include('view/header.php');
+      include('view/edit_contact.php');
+      include('view/footer.php');
+    }
+
+
     //do something
   }
 
@@ -169,6 +192,58 @@ class ContactController
       include('view/header.php');
       include('view/list_contacts.php');
       include('view/footer.php');
+    }
+  }
+
+  /**
+  * update
+  *
+  * Update the information of a contact in the database.
+  **/
+  public function update()
+  {
+    //get all the data inputted
+    $vals = array_merge($_POST, $_GET);
+
+    //validate the data
+    $errors = array();
+
+    //TODO:move the bulk of this to the validation library.
+    if(empty($vals['id']))
+      $errors['id'] = "Cannot update a contact without an id.";
+    if(empty($vals['last_name']))
+      $errors['last_name'] = "Last name is required.";
+    if(empty($vals['first_name']))
+      $errors['first_name'] = "First name is required.";
+    if(empty($vals['type']))
+      $errors['type'] = "Number type is required.";
+    if(empty($vals['number']))
+      $errors['number'] = "Number is required.";
+
+    // All AJAX calls are done via a POST request. This is because
+    // I want the application to function if Javascript isn't enabled.
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      //not sure yet.
+    }
+    else
+    {
+      //If we are error free, add the new contact and redirect to the 
+      //index page to update the contact list.
+      if(count($errors) == 0)
+      {
+        //update the contact
+        $this->contact_model->UpdateContact($vals);
+        header('Location: index.php');
+      }
+      else
+      {
+        //display the errors
+        $contact = $this->contact_model->GetContact($vals['id']);
+        include("view/header.php");
+        include("view/edit_contact.php");
+        include("view/footer.php");
+      }
     }
   }
 

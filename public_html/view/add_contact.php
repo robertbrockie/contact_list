@@ -5,13 +5,13 @@
 	<select id="add_type" name="type" class="input-small">
 		<option>Type</option>
 		<option value="MOBILE" <?= $vals['type'] == "MOBILE" ? 'selected' : '' ?>>Mobile</option>
-		<option value="HOME" <?= $vals['type'] == "MOBILE" ? 'selected' : '' ?>>Home</option>
-		<option value="OFFICE" <?= $vals['type'] == "MOBILE" ? 'selected' : '' ?>>Office</option>
-		<option value="OTHER" <?= $vals['type'] == "MOBILE" ? 'selected' : '' ?>>Other</option>
+		<option value="HOME" <?= $vals['type'] == "HOME" ? 'selected' : '' ?>>Home</option>
+		<option value="OFFICE" <?= $vals['type'] == "OFFICE" ? 'selected' : '' ?>>Office</option>
+		<option value="OTHER" <?= $vals['type'] == "OTHER" ? 'selected' : '' ?>>Other</option>
 	</select>
 	<input type="text" id="add_number" name="number" class="input-small" placeholder="Phone Number" value="<?= $vals['number'] ?>">
 
     <input type="submit" class="btn" name="submit" onclick="AddContact(); return false;" value="Add Contract"></input>
-
-    <?php if(isset($errors)) { include('view/errors.php'); } ?>
 </form>
+
+<?php if(isset($errors)) { include('view/errors.php'); } ?>
