@@ -64,9 +64,12 @@ class ContactModel
     *
     *   Get a list of contacts from the database.
     **/
-    public function GetContacts()
+    public function GetContacts($field = "last_name", $order = "desc")
     {
-        $query = sprintf("SELECT * FROM contact");
+        $query = sprintf("SELECT * FROM contact ORDER BY %s %s ", 
+                    mysql_real_escape_string($field),
+                    mysql_real_escape_string($order));
+
         $result = $this->db->query($query);
 
         //get the contacts we want

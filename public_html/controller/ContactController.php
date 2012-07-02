@@ -48,7 +48,7 @@ class ContactController
 
       case "list":
       {
-        $this->listing();
+        $this->listing($vals);
         break;
       }
 
@@ -177,10 +177,14 @@ class ContactController
   *
   * List all contacts in the database.
   **/
-  public function listing()
+  public function listing($vals)
   {
+    //get the sorting
+    $field = isset($vals['field']) ? $vals['field'] : '';
+    $order = isset($vals['order']) ? $vals['order'] : '';
+
     //get the latest contacts
-    $contacts = $this->contact_model->GetContacts();
+    $contacts = $this->contact_model->GetContacts($field, $order);
 
     //ajax calls will be done via post
     if($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -189,9 +193,7 @@ class ContactController
     }
     else
     {
-      include('view/header.php');
-      include('view/list_contacts.php');
-      include('view/footer.php');
+      include('view/template.php');
     }
   }
 
@@ -246,7 +248,4 @@ class ContactController
       }
     }
   }
-
-
-
 }
