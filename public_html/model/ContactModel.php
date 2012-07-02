@@ -85,6 +85,43 @@ class ContactModel
     }
 
     /**
+    *   SearchContacts
+    *
+    *   Search contacts based:
+    *       -first_name
+    *       -last_name
+    *       -number
+    *       
+    **/
+    public function SearchContacts($data)
+    {
+        //what are we looking for?
+        $first_name = isset($data['first_name']) ? $data['first_name'] : '';
+        $last_name = isset($data['last_name']) ? $data['last_name'] : '';
+        $number = isset($data['number']) ? $data['number'] : '';
+
+        //build the search query
+        $query = "SELECT * FROM contact WHERE ";
+        $query .= 'first_name like "%'.mysql_real_escape_string($first_name).'%"  AND ';
+        $query .= 'last_name like "%'.mysql_real_escape_string($last_name).'%" AND ';
+        $query .= 'number like "%'.mysql_real_escape_string($number).'%" ';
+
+        //search!!!
+        $result = $this->db->query($query);
+
+        //get the contacts we want
+        $contacts = array();
+        while ($row = mysql_fetch_assoc($result))
+        {
+            array_push($contacts, new Contact(
+                    $row['id'], $row['first_name'], $row['last_name'],
+                    $row['number'], $row['type']));
+        }
+
+        return $contacts;
+    }
+
+    /**
     *   DeleteContact
     *
     *   Remove a contact from the database by their id.

@@ -215,6 +215,32 @@ class ContactController
   }
 
   /**
+  * Search
+  *
+  * Search though the contact list, display what we found.
+  **/
+  public function search()
+  {
+    //get all the data inputted
+    $vals = array_merge($_POST, $_GET);
+
+    //search the contacts
+    $contacts = $this->contact_model->SearchContacts($vals);
+
+    //ajax calls will be done via post
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      //TODO: AJAX search functionality not need for now.
+    }
+    else
+    {
+      //display the ordered fields.
+      include('view/template.php');
+    }
+
+  }
+
+  /**
   * Update
   *
   * Update the information of a contact in the database.

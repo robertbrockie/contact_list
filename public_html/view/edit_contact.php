@@ -1,4 +1,3 @@
-<?php include('view/header.php'); ?>
 <div id="edit_contact">
 	<h2>Edit Contact</h2>
 	<form action="index.php" method="get" accept-charset="utf-8" class="well form-inline">
@@ -20,4 +19,3 @@
 	</form>
     <?php if(isset($errors)) { include('view/errors.php'); } ?>
 </div>
-<?php include('view/footer.php'); ?>

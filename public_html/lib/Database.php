@@ -1,5 +1,4 @@
 <?php
-//TODO:separate the config 
 
 class Database
 {

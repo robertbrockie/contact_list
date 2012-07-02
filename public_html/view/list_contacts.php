@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th><a href="index.php?action=list&field=last_name&order=asc"><i class="icon-arrow-up"></i></a>
-				<a href="index.php?action=list&field=last_name&order=desc"<i class="icon-arrow-down"></i></a>
+				<a href="index.php?action=list&field=last_name&order=desc"><i class="icon-arrow-down"></i></a>
 				Last Name
 			</th>
 			<th><a href="index.php?action=list&field=first_name&order=asc"><i class="icon-arrow-up"></i></a>

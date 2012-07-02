@@ -11,8 +11,13 @@ function AddContact()
 	$('#add_type').removeClass('error_input');
 	$('#add_number').removeClass('error_input');
 
+	//clear previous errors
+	$('#errors').html('');
 	//error flag, if we have errors don't try and add the new contact
 	var errors = false;
+	
+	//store any error messages we get.
+	var error_messages = new Array();
 
 	//get and validate the first name
 	var first_name = $('#add_first_name').val();
@@ -20,6 +25,7 @@ function AddContact()
 	{
 		$('#add_first_name').addClass('error_input');
 		errors = true;
+		error_messages.push("First name is required.");
 	}
 
 	//get and validate the last_name
@@ -28,6 +34,7 @@ function AddContact()
 	{
 		$('#add_last_name').addClass('error_input');
 		errors = true;
+		error_messages.push("Last name is required.");
 	}
 
 	//get and validate the type
@@ -36,6 +43,7 @@ function AddContact()
 	{
 		$('#add_type').addClass('error_input');
 		errors = true;
+		error_messages.push("Type is required.");
 	}
 
 	//get and validate the number
@@ -44,6 +52,7 @@ function AddContact()
 	{
 		$('#add_number').addClass('error_input');
 		errors = true;
+		error_messages.push("Number is required.");
 	}
 
 	//no errors, let's add the contact
@@ -70,8 +79,29 @@ function AddContact()
 			}  
 		});
 	}
+	else
+	{
+		//display the errors
+		ShowErrorMessages(error_messages);
+	}
 
 	return false;
+}
+
+/**
+	ShowErrorMessages
+
+	Display error messages in the same style if Javascript was disabled.
+**/
+function ShowErrorMessages(error_messages)
+{
+	//start building the html
+	error_html = '<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>';
+	for (var i = 0; i < error_messages.length; i++) { error_html += '<p>' + error_messages[i] + '</p>'; }
+    error_html += '</div>';
+
+	//rendering time
+	$('#errors').html(error_html);
 }
 
 /**
