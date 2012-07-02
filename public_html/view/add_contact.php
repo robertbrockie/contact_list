@@ -12,7 +12,7 @@
 	</select>
 	<input type="text" id="add_number" name="number" placeholder="Phone Number" value="<?= $vals['number'] ?>">
 
-    <input type="submit" class="btn" name="submit" onclick="AddContact(); return false;" value="Add Contract"/>
+    <input type="submit" class="btn btn-primary" name="submit" onclick="AddContact(); return false;" value="Add Contract"/>
 </form>
 
 <?php if(isset($errors)) { include('view/errors.php'); } ?>

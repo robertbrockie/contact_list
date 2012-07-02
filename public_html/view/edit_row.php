@@ -16,6 +16,6 @@
 	<option value="OTHER">OTHER</option>
 </select></td>
 <td><input type="text" id="edit_number_<?= $contact->id ?>" value="<?= $contact->number ?>"/></td>
-<td><a href="#" class="btn" onclick="UpdateContact(<?= $contact->id ?>); return false;">edit</a></td>
+<td><a href="#" class="btn btn-primary" onclick="UpdateContact(<?= $contact->id ?>); return false;">edit</a></td>
 <td><a href="index.php" class="btn">close</a></td>
 <?php } ?>

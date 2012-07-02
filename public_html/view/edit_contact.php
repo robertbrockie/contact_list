@@ -14,8 +14,8 @@
 		</select>
 		<input type="text" name="number" class="input-small" placeholder="Phone Number" value="<?= $contact->number ?>">
 
-	    <button type="submit" class="btn" name="submit">Update Contact</button>
-	    <a href="index.php" class="btn" name="Back">Back</a>
+	    <button type="submit" class="btn btn-primary" name="submit">Update Contact</button>
+	    <a href="index.php" class="btn btn-info" name="Back">Back</a>
 	</form>
     <?php if(isset($errors)) { include('view/errors.php'); } ?>
 </div>

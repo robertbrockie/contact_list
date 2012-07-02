@@ -148,7 +148,7 @@ function EditContact(id)
 						+ " <option value='OTHER'>OTHER</option>"
 						+ "</select></td>"
 						+ "<td><input type='text' id='edit_number_"+id+"' value='"+number+"'/></td>"
-						+ "<td><a href='#'' class='btn' onclick='UpdateContact("+id+"); return false;''>edit</a></td>"
+						+ "<td><a href='#'' class='btn btn-primary' onclick='UpdateContact("+id+"); return false;''>edit</a></td>"
 						+ "<td><a href='index.php' class='btn'>close</a></td>";
 	//change time.
 	$('#row_'+id).html(edit_row_html);
