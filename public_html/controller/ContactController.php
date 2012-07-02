@@ -90,7 +90,7 @@ class ContactController
     if(empty($vals['first_name']))
       $errors['first_name'] = "First name is required.";
     if(empty($vals['type']))
-      $errors['type'] = "Number type is required.";
+      $errors['type'] = "Type is required.";
     if(empty($vals['number']))
       $errors['number'] = "Number is required.";
 
@@ -180,8 +180,8 @@ class ContactController
   public function listing($vals)
   {
     //get the sorting
-    $field = isset($vals['field']) ? $vals['field'] : '';
-    $order = isset($vals['order']) ? $vals['order'] : '';
+    $field = isset($vals['field']) ? $vals['field'] : 'last_name';
+    $order = isset($vals['order']) ? $vals['order'] : 'asc';
 
     //get the latest contacts
     $contacts = $this->contact_model->GetContacts($field, $order);
@@ -218,7 +218,7 @@ class ContactController
     if(empty($vals['first_name']))
       $errors['first_name'] = "First name is required.";
     if(empty($vals['type']))
-      $errors['type'] = "Number type is required.";
+      $errors['type'] = "Type is required.";
     if(empty($vals['number']))
       $errors['number'] = "Number is required.";
 

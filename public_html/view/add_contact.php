@@ -3,7 +3,7 @@
 	<input type="text" id="add_last_name" name="last_name" class="input-small" placeholder="Last Name" value="<?= isset($vals['last_name']) ? $vals['last_name'] : '' ?>">
 	<input type="text" id="add_first_name" name="first_name" class="input-small" placeholder="First Name" value="<?= $vals['first_name'] ?>">
 	<select id="add_type" name="type" class="input-small">
-		<option>Type</option>
+		<option value="">Type</option>
 		<option value="MOBILE" <?= $vals['type'] == "MOBILE" ? 'selected' : '' ?>>Mobile</option>
 		<option value="HOME" <?= $vals['type'] == "HOME" ? 'selected' : '' ?>>Home</option>
 		<option value="OFFICE" <?= $vals['type'] == "OFFICE" ? 'selected' : '' ?>>Office</option>
