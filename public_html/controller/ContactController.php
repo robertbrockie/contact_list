@@ -48,7 +48,13 @@ class ContactController
 
       case "list":
       {
-        $this->listing($vals);
+        $this->listing();
+        break;
+      }
+
+      case "search":
+      {
+        $this->search();
         break;
       }
 
@@ -64,6 +70,7 @@ class ContactController
   * index
   *
   * Display the application to the user.
+  *
   **/
   public function index()
   {
@@ -74,7 +81,8 @@ class ContactController
   /**
   * add()
   *
-  * Validate the proper contact fields.
+  * Validate the proper contact fields and add the contact.
+  *
   **/
   public function add()
   {
@@ -128,9 +136,10 @@ class ContactController
   }
 
   /**
-  * delete($id)
+  * Delete($id)
   *
   * Remove a specific contact.
+  *
   **/
   public function delete($id)
   {
@@ -148,57 +157,65 @@ class ContactController
   }
 
   /**
-  * edit($id)
+  * Edit($id)
   *
-  * Display the 
+  * Display the edit contact form.
+  *
   **/
   public function edit($id)
   {
+    //get the current contact details
     $contact = $this->contact_model->GetContact($id);
 
     //ajax calls will be done via post
     if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-      //TODO: this functionality isn't needed right now 
+      //Javascript will take care of handling the edit 
+      //fields.
     }
     else
     {
+      //display the contact for editing
       include('view/header.php');
       include('view/edit_contact.php');
       include('view/footer.php');
     }
-
-
-    //do something
   }
 
   /**
-  * list
+  * List()
   *
-  * List all contacts in the database.
+  * List all contacts in the database, sorted and ordered
+  * specified in $vals
+  *
   **/
-  public function listing($vals)
+  public function listing()
   {
-    //get the sorting
+    //get all the data inputted
+    $vals = array_merge($_POST, $_GET);
+
+    //get the field/ordering
     $field = isset($vals['field']) ? $vals['field'] : 'last_name';
     $order = isset($vals['order']) ? $vals['order'] : 'asc';
 
-    //get the latest contacts
+    //get the contacts
     $contacts = $this->contact_model->GetContacts($field, $order);
 
     //ajax calls will be done via post
     if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
+      //javascript will put the html where it needs to be.
       include('view/list_contacts.php');
     }
     else
     {
+      //display the ordered fields.
       include('view/template.php');
     }
   }
 
   /**
-  * update
+  * Update
   *
   * Update the information of a contact in the database.
   **/

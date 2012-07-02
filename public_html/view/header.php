@@ -16,3 +16,7 @@
 
 	<body>
 		<div class="container">
+			<div class="hero-unit">
+				<h1>Contact List</h1>
+    			<p>a developer test</p>
+    		</div>

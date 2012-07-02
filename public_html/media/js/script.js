@@ -94,6 +94,11 @@ function DeleteContact(id)
 	}
 }
 
+/**
+	Edit Contact
+
+	Will update the the table list with editable fields.
+**/
 function EditContact(id)
 {
 	//get the values
@@ -122,10 +127,13 @@ function EditContact(id)
 	$("#edit_type_"+id).val(type).attr('selected',true);
 }
 
+/**
+	Update Contact
 
+	Validate some new data for an existing contact and update via AJAX.
+**/
 function UpdateContact(id)
 {
-
 	//remove error classes from possible previous errors
 	$('#edit_first_name_'+id).removeClass('error_input');
 	$('#edit_last_name_'+id).removeClass('error_input');
@@ -172,18 +180,15 @@ function UpdateContact(id)
 	//no errors, let's update the contact
 	if(!errors)
 	{
+		//build the datastring
 		var datastring = 'action=update&id='+id+'&first_name='+first_name+'&last_name='+last_name+'&type='+type+'&number='+number;
-		alert(datastring);
 
 		//update the contact and render the html
 		$.ajax({  
 			type: "POST",  
 			url: "index.php",  
 			data: datastring,  
-			success: function(data)
-			{
-				$('#row_'+id).html(data);
-			}  
+			success: function(data) { $('#row_'+id).html(data); }  
 		});
 	}
 }

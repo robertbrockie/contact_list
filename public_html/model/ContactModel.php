@@ -23,7 +23,7 @@ class ContactModel
     /**
     *   AddContact
     *
-    *   Add a new contact and an associated phone number.
+    *   Add a new contact and phone number.
     *   Returns true if the contact and number are successfully created,
     *   false otherwise.
     **/

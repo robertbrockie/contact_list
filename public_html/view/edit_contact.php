@@ -1,6 +1,6 @@
 <?php include('view/header.php'); ?>
 <div id="edit_contact">
-	<h1>Edit Contact</h1>
+	<h2>Edit Contact</h2>
 	<form action="index.php" method="get" accept-charset="utf-8" class="well form-inline">
 		<input type="hidden" name="action" value="update"/>
 		<input type="hidden" name="id" value="<?= $contact->id ?>"/>
