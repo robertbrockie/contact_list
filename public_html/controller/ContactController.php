@@ -226,7 +226,16 @@ class ContactController
     // I want the application to function if Javascript isn't enabled.
     if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-      //not sure yet.
+      if(count($errors) == 0)
+      {
+        //update the contact
+        $this->contact_model->UpdateContact($vals);
+      }
+
+      //get the updated contact
+      $contact = $this->contact_model->GetContact($vals['id']);
+      include("view/edit_row.php");
+
     }
     else
     {

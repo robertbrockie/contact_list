@@ -1,5 +1,4 @@
 <?php include('view/header.php'); ?>
-
 <div id="edit_contact">
 	<h1>Edit Contact</h1>
 	<form action="index.php" method="get" accept-charset="utf-8" class="well form-inline">
@@ -21,5 +20,4 @@
 	</form>
     <?php if(isset($errors)) { include('view/errors.php'); } ?>
 </div>
-
 <?php include('view/footer.php'); ?>

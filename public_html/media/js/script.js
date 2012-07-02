@@ -174,5 +174,16 @@ function UpdateContact(id)
 	{
 		var datastring = 'action=update&id='+id+'&first_name='+first_name+'&last_name='+last_name+'&type='+type+'&number='+number;
 		alert(datastring);
+
+		//update the contact and render the html
+		$.ajax({  
+			type: "POST",  
+			url: "index.php",  
+			data: datastring,  
+			success: function(data)
+			{
+				$('#row_'+id).html(data);
+			}  
+		});
 	}
 }

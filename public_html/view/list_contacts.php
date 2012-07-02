@@ -1,5 +1,4 @@
 <h1>Contact List</h1>
-
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
