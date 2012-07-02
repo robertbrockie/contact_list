@@ -30,8 +30,7 @@
 			<td id="first_name_<?= $contact->id ?>"><?= $contact->first_name ?></td>
 			<td id="type_<?= $contact->id ?>"><?= $contact->type ?></td>
 			<td id="number_<?= $contact->id ?>"><?= $contact->number ?></td>
-			<!--<td><a href="/index.php?action=edit&id=<?= $contact->id ?>" onclick="EditContact(<?= $contact->id ?>); return false;">[edit]</a></td>-->
-			<td><a href="#" onclick="EditContact(<?= $contact->id ?>); return false;">[edit]</a></td>
+			<td><a href="/index.php?action=edit&id=<?= $contact->id ?>" onclick="EditContact(<?= $contact->id ?>); return false;">[edit]</a></td>
 			<td><a href="/index.php?action=delete&id=<?= $contact->id ?>" onclick="DeleteContact(<?= $contact->id ?>); return false;">[remove]</a></td>
 		</tr>
 		<?php endforeach ?>

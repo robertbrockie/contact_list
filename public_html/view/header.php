@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="/media/js/script.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/media/css/style.css"/>
 
 	</head>
 
