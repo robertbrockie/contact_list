@@ -1,10 +1,11 @@
 <?php
 
-//include_once("model/Validate.php");
+include_once("lib/Validation.php");
 include_once("model/ContactModel.php");
 
 class ContactController
 {
+  //model for handling contacts
   public $contact_model;
 
   public function __construct()  
@@ -12,6 +13,11 @@ class ContactController
     $this->contact_model = new ContactModel();
   }
 
+  /**
+  * invoke
+  *
+  * Rudimentary "routing".
+  **/
   public function invoke()  
   {
     //invoke will take care of figuring out 
@@ -89,18 +95,15 @@ class ContactController
     //get all the data inputted
     $vals = array_merge($_POST, $_GET);
 
-    //validate the data
-    $errors = array();
+    //setup validation
+    $validation = new Validation();
+    $validation->required_field('last_name', "Last name is required.");
+    $validation->required_field('first_name', "First name is required.");
+    $validation->required_field('type', "Type is required.");
+    $validation->required_field('number', "Number is required.");
 
-    //TODO:move the bulk of this to the validation library.
-    if(empty($vals['last_name']))
-      $errors['last_name'] = "Last name is required.";
-    if(empty($vals['first_name']))
-      $errors['first_name'] = "First name is required.";
-    if(empty($vals['type']))
-      $errors['type'] = "Type is required.";
-    if(empty($vals['number']))
-      $errors['number'] = "Number is required.";
+    //validate the data
+    $errors = $validation->run($vals);
 
     // All AJAX calls are done via a POST request. This is because
     // I want the application to function if Javascript isn't enabled.
@@ -249,21 +252,16 @@ class ContactController
   {
     //get all the data inputted
     $vals = array_merge($_POST, $_GET);
+    
+    //setup validation
+    $validation = new Validation();
+    $validation->required_field('last_name', "Last name is required.");
+    $validation->required_field('first_name', "First name is required.");
+    $validation->required_field('type', "Type is required.");
+    $validation->required_field('number', "Number is required.");
 
     //validate the data
-    $errors = array();
-
-    //TODO:move the bulk of this to the validation library.
-    if(empty($vals['id']))
-      $errors['id'] = "Cannot update a contact without an id.";
-    if(empty($vals['last_name']))
-      $errors['last_name'] = "Last name is required.";
-    if(empty($vals['first_name']))
-      $errors['first_name'] = "First name is required.";
-    if(empty($vals['type']))
-      $errors['type'] = "Type is required.";
-    if(empty($vals['number']))
-      $errors['number'] = "Number is required.";
+    $errors = $validation->run($vals);
 
     // All AJAX calls are done via a POST request. This is because
     // I want the application to function if Javascript isn't enabled.
