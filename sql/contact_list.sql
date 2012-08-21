@@ -39,4 +39,4 @@ CREATE TABLE IF NOT EXISTS `contact` (
 --
 
 INSERT INTO `contact` (`id`, `first_name`, `last_name`, `number`, `type`) VALUES
-(1, 'Kim', 'Phillips', '514-891-2325', 'MOBILE');
+(1, 'Robert', 'Brockie', '514-463-3478', 'MOBILE');
